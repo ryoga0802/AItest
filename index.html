@@ -22,6 +22,7 @@
         <a href="#usecases">活用例</a>
         <a href="#flow">導入の流れ</a>
         <a href="#faq">FAQ</a>
+        <a href="#contact">お問い合わせ</a>
       </nav>
       <a class="btn btn-sm btn-primary header-cta" href="#cta">無料相談を予約</a>
     </div>
@@ -353,6 +354,48 @@
       </div>
     </section>
 
+    <!-- お問い合わせフォーム（GAS → スプレッドシート） -->
+    <section class="section section-contact" id="contact">
+      <div class="wrap narrow">
+        <h2 class="section-title">お問い合わせ</h2>
+        <p class="contact-lead">
+          ご相談・ご質問は下記フォームよりお送りください。内容を確認のうえ、折り返しご連絡いたします。
+        </p>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <label for="cf-name">お名前 <span class="req">必須</span></label>
+            <input type="text" id="cf-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="form-row">
+            <label for="cf-email">メールアドレス <span class="req">必須</span></label>
+            <input type="email" id="cf-email" name="email" required autocomplete="email" />
+          </div>
+          <div class="form-row">
+            <label for="cf-company">会社名</label>
+            <input type="text" id="cf-company" name="company" autocomplete="organization" />
+          </div>
+          <div class="form-row">
+            <label for="cf-phone">電話番号</label>
+            <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+          </div>
+          <div class="form-row">
+            <label for="cf-message">お問い合わせ内容 <span class="req">必須</span></label>
+            <textarea id="cf-message" name="message" rows="5" required placeholder="ご相談内容をご自由にご記入ください"></textarea>
+          </div>
+          <div class="form-row form-row--check">
+            <label class="checkbox-label">
+              <input type="checkbox" id="cf-privacy" name="privacy" required />
+              <span>個人情報の取り扱いに同意する <span class="req">必須</span></span>
+            </label>
+          </div>
+          <p class="form-note" id="contact-form-note" role="status" aria-live="polite"></p>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg" id="contact-submit">送信する</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <!-- 11. CTA -->
     <section class="section section-cta" id="cta">
       <div class="wrap narrow">
@@ -409,6 +452,20 @@
     <span>無料相談を予約</span>
   </a>
 
+  <!-- GAS 向け: 非表示フォーム＋iframe（no-cors fetch より本文が確実に届く） -->
+  <iframe class="gas-bridge-iframe" name="gas-bridge-iframe" id="gas-bridge-iframe" title="フォーム送信用" tabindex="-1" src="about:blank"></iframe>
+  <form id="gas-bridge-form" class="visually-hidden" method="post" target="gas-bridge-iframe" action="">
+    <input type="hidden" name="name" id="gas-f-name" value="" />
+    <input type="hidden" name="email" id="gas-f-email" value="" />
+    <input type="hidden" name="company" id="gas-f-company" value="" />
+    <input type="hidden" name="phone" id="gas-f-phone" value="" />
+    <input type="hidden" name="message" id="gas-f-message" value="" />
+    <input type="hidden" name="privacy" id="gas-f-privacy" value="" />
+    <input type="hidden" name="source" value="LP" />
+    <input type="hidden" name="_secret" id="gas-f-secret" value="" />
+  </form>
+
+  <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1121,6 +1121,156 @@ a {
   line-height: 1.65;
 }
 
+/* Contact form */
+.section-contact {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-lead {
+  margin: -20px auto 28px;
+  max-width: 540px;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.contact-form {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.form-row .req {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--font-jp);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-row--check {
+  margin-bottom: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.form-note {
+  min-height: 1.5em;
+  margin: 16px 0 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.form-note--ok {
+  color: var(--success);
+}
+
+.form-note--error {
+  color: #b91c1c;
+}
+
+.form-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-actions .btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* GAS 送信用（画面外・1px 確保：一部ブラウザで display:none だと送られない件への配慮） */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gas-bridge-iframe {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* CTA */
 .section-cta {
   background: linear-gradient(165deg, #1a2744 0%, var(--bg-dark) 55%, #080c14 100%);

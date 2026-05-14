@@ -1,6 +1,132 @@
 (function () {
   "use strict";
 
+  var MIN_DISPLAY_MS = 2000;
+  var HIDE_TRANSITION_MS = 450;
+  var LOAD_FALLBACK_MS = 30000;
+
+  var loaderEl = document.getElementById("page-loader");
+  var pctEl = document.getElementById("page-loader-pct");
+  var progressBarEl = document.getElementById("page-loader-progress");
+  var statusEl = document.getElementById("page-loader-status");
+
+  var loaderDone = false;
+  var loaderStarted = performance.now();
+  var displayedPct = 0;
+  var targetPct = 3;
+
+  function bumpProgress(minPct, statusText) {
+    if (typeof minPct === "number") {
+      targetPct = Math.max(targetPct, Math.min(100, minPct));
+    }
+    if (statusText && statusEl) {
+      statusEl.textContent = statusText;
+    }
+  }
+
+  function paintProgress(pct) {
+    var clamped = Math.min(100, Math.max(0, pct));
+    if (loaderEl) {
+      loaderEl.style.setProperty("--loader-pct", String(clamped));
+    }
+    if (pctEl) {
+      pctEl.textContent = String(Math.round(clamped));
+    }
+    if (progressBarEl) {
+      progressBarEl.setAttribute("aria-valuenow", String(Math.round(clamped)));
+    }
+  }
+
+  function loaderRafTick() {
+    if (loaderDone) return;
+    displayedPct += (targetPct - displayedPct) * 0.11;
+    if (Math.abs(targetPct - displayedPct) < 0.22) {
+      displayedPct = targetPct;
+    }
+    paintProgress(displayedPct);
+    requestAnimationFrame(loaderRafTick);
+  }
+
+  requestAnimationFrame(loaderRafTick);
+
+  window.setTimeout(function () {
+    bumpProgress(9, null);
+  }, 80);
+
+  function onDomReady() {
+    bumpProgress(28, "ページ構成を読み込み中…");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", onDomReady);
+  } else {
+    onDomReady();
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      bumpProgress(52, "フォントを適用しています…");
+    });
+  } else {
+    bumpProgress(46, "スタイルを適用しています…");
+  }
+
+  var heroVideo = document.querySelector(".hero-video");
+  if (heroVideo) {
+    var videoBumped = false;
+    function onVideoReady() {
+      if (videoBumped) return;
+      videoBumped = true;
+      bumpProgress(82, "動画・メディアを準備中…");
+    }
+    heroVideo.addEventListener("loadeddata", onVideoReady);
+    heroVideo.addEventListener("canplay", onVideoReady);
+    if (heroVideo.readyState >= 2) {
+      onVideoReady();
+    }
+  } else {
+    bumpProgress(72, "コンテンツを読み込み中…");
+  }
+
+  function hidePageLoader() {
+    if (loaderDone) return;
+    loaderDone = true;
+
+    targetPct = 100;
+    displayedPct = 100;
+    paintProgress(100);
+    if (statusEl) {
+      statusEl.textContent = "表示の準備が完了しました";
+    }
+
+    var elapsed = performance.now() - loaderStarted;
+    var remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
+
+    window.setTimeout(function () {
+      document.body.classList.remove("is-loading");
+      if (!loaderEl) return;
+
+      loaderEl.classList.add("page-loader--hide");
+      loaderEl.setAttribute("aria-busy", "false");
+
+      window.setTimeout(function () {
+        loaderEl.hidden = true;
+        loaderEl.setAttribute("aria-hidden", "true");
+      }, HIDE_TRANSITION_MS);
+    }, remaining);
+  }
+
+  window.addEventListener("load", hidePageLoader);
+
+  window.setTimeout(function () {
+    if (!loaderDone) {
+      if (statusEl) {
+        statusEl.textContent = "読み込みに時間がかかっています。表示します…";
+      }
+      hidePageLoader();
+    }
+  }, LOAD_FALLBACK_MS);
+
   // 活用例タブ
   var tabs = document.querySelectorAll(".usecase-tabs .tab");
   var panels = document.querySelectorAll(".usecase-panels .panel");

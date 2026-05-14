@@ -10,7 +10,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="is-loading">
+  <div id="page-loader" class="page-loader" style="--loader-pct: 0;" role="status" aria-live="polite" aria-busy="true">
+    <div class="page-loader-inner">
+      <div
+        class="page-loader-meter"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+        aria-labelledby="page-loader-status"
+        id="page-loader-progress"
+      >
+        <div class="page-loader-meter-frame">
+          <span class="page-loader-bracket page-loader-bracket--tl" aria-hidden="true"></span>
+          <span class="page-loader-bracket page-loader-bracket--tr" aria-hidden="true"></span>
+          <span class="page-loader-bracket page-loader-bracket--bl" aria-hidden="true"></span>
+          <span class="page-loader-bracket page-loader-bracket--br" aria-hidden="true"></span>
+
+          <div class="page-loader-meter-head">
+            <span class="page-loader-meter-tag">LOAD</span>
+            <span class="page-loader-meter-phase" id="page-loader-status">初期化しています…</span>
+          </div>
+
+          <div class="page-loader-meter-scale" aria-hidden="true"></div>
+
+          <div class="page-loader-meter-track">
+            <div class="page-loader-meter-fill"></div>
+            <div class="page-loader-meter-glint" aria-hidden="true"></div>
+          </div>
+
+          <div class="page-loader-meter-readout">
+            <span class="page-loader-pct" id="page-loader-pct">0</span><span class="page-loader-pct-unit">%</span>
+          </div>
+        </div>
+      </div>
+      <p class="page-loader-text">サイトを準備しています。しばらくお待ちください。</p>
+    </div>
+  </div>
   <header class="site-header">
     <div class="wrap header-inner">
       <a href="#top" class="logo">
@@ -247,6 +284,18 @@
       <div class="wrap">
         <h2 class="section-title">実際にイメージしやすい改善例</h2>
         <p class="ba-disclaimer">※ 導入後の<strong>改善イメージ</strong>です。業務内容により効果は異なります。</p>
+        <figure class="ba-figure">
+          <img
+            class="ba-figure-img"
+            src="asset/img/画像１.png"
+            alt="書類・LINE・Excel・議事録・問い合わせなどのばらつきが、見積・記録・問い合わせ・整理済みの流れへまとまるイメージ"
+            width="1672"
+            height="941"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="ba-caption">忙しさがひとつずつ軽くなるイメージ（例）</figcaption>
+        </figure>
         <div class="ba-grid">
           <div class="ba-card ba-before">
             <h3 class="ba-label">Before</h3>

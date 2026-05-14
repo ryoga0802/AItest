@@ -31,7 +31,12 @@
   <main>
     <!-- 1. ファーストビュー -->
     <section class="hero" id="top">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+          <source src="asset/video/背景動画.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-bg-overlay"></div>
+      </div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="hero-badge">建設業の現場と事務の実態を踏まえた提案</p>
@@ -51,26 +56,6 @@
           <div class="hero-cta-row">
             <a class="btn btn-primary btn-lg" href="#cta">無料相談を予約する</a>
             <a class="btn btn-outline btn-lg" href="#cta">まずは導入イメージを相談する</a>
-          </div>
-        </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="visual-card visual-card--main">
-            <div class="visual-chaos">
-              <span class="doc doc--1">書類</span>
-              <span class="doc doc--2">LINE</span>
-              <span class="doc doc--3">Excel</span>
-              <span class="doc doc--4">議事録</span>
-              <span class="doc doc--5">問合せ</span>
-            </div>
-            <div class="visual-order">
-              <div class="order-stack">
-                <span class="order-item">見積・提案</span>
-                <span class="order-item">記録・共有</span>
-                <span class="order-item">問い合わせ</span>
-                <span class="order-item done">整理済み</span>
-              </div>
-            </div>
-            <p class="visual-caption">忙しさが、ひとつずつ軽くなるイメージ</p>
           </div>
         </div>
       </div>
